@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Hello World! Site Title</title>
+  </head>
+  <body>
+    <h1>Hello World!</h1>
+    <select id="departureStation">
+      <option value="24th">24th</option>
+    </select>
+    <select id="arrivalStation">
+      <option value="12th">12th</option>
+    </select>
+    <button id="searchSchedules" type="button">Search</button>
+    <!-- JavaScript -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{{ url_for('static',filename='js/getStations.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/searchSchedules.js') }}"></script>
+  </body>
+</html>
