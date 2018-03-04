@@ -1,3 +1,4 @@
+//setInterval(function () {document.getElementById("myButtonId").click();}, 1000);
 document.getElementById("searchSchedules").onclick = function () {
         var filterDepartureStation = document.getElementById("departureStation").value;
         var filterArrivalStation = document.getElementById("arrivalStation").value;
@@ -7,13 +8,22 @@ document.getElementById("searchSchedules").onclick = function () {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 cache: false,
-                success: function() {
-                    // Success message
-                    // inject that data into HTML
-                },
+
+                success: function(result) {
+                    console.log(result);
+                    var dataset = result.data;
+                    var results = document.getElementById("results");
+                    for(var i = 0; i < dataset.length; i++) {
+                        var opt = document.createElement('option');
+                        opt.innerHTML = String(dataset[i]["@destTimeMin"] + "&emsp;|&emsp;" + dataset[i]["@origTimeMin"] + "&emsp;|&emsp;" + dataset[i]["@fare"]);
+                        opt.value = String(dataset[i]["@destTimeMin"] + "&emsp;|&emsp;" + dataset[i]["@origTimeMin"] + "&emsp;|&emsp;" + dataset[i]["@fare"]);
+                        results.appendChild(opt);
+                    };
+               },
+
                 error: function() {
                     // Fail message
-                    // inject that data into HTML
+                     console.log("error");
                 },
         });
 };

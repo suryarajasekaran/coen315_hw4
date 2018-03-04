@@ -8,3 +8,4 @@ requests==2.2.1
 googlemaps
 flask_restful
 flask
+flask_cors

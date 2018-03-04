@@ -6,15 +6,30 @@
   <body>
     <h1>Hello World!</h1>
     <select id="departureStation">
-      <option value="24th">24th</option>
+      <!--<option value="12th">Select</option>-->
     </select>
     <select id="arrivalStation">
-      <option value="12th">12th</option>
+      <!--<option value="24th">Select</option>-->
     </select>
     <button id="searchSchedules" type="button">Search</button>
+
+    <article id="results">
+        <!--
+        <section>
+            <p id="resultFare" type="text"> Fare : </p> 
+            <p id="resultOrigin" type="text"> Origin : </p> 
+            <p id="resultDest" type="text"> Dest : </p>
+        </section>
+        -->
+    </article>
+    <button id="session" type="button">click</button>
+    <p id="count"> Count :  </p>
+
     <!-- JavaScript -->
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="{{ url_for('static',filename='js/getStations.js') }}"></script>
     <script src="{{ url_for('static',filename='js/searchSchedules.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/getStat.js') }}"></script>
   </body>
 </html>
