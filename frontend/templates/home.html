@@ -2,6 +2,35 @@
 <html>
   <head>
     <title>Hello World! Site Title</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 40%;
+        width: 40%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+      }
+    </style>
   </head>
   <body>
     <h1>Hello World!</h1>
@@ -12,9 +41,9 @@
       <!--<option value="24th">Select</option>-->
     </select>
     <button id="searchSchedules" type="button">Search</button>
-
     <article id="results">
         <!--
+        //REFRESH BEFORE PRINTING
         <section>
             <p id="resultFare" type="text"> Fare : </p> 
             <p id="resultOrigin" type="text"> Origin : </p> 
@@ -22,14 +51,65 @@
         </section>
         -->
     </article>
-    <button id="session" type="button">click</button>
+
+    <p id="StationInfo"></p>
+
+    <p id="session"> Message : </p>
+    <p id="count"> Count : </p>
+
+    <p id = "Countdown"> Time left : </p>
+
+    <!--button id="session" type="button">click</button>
+
     <p id="count"> Count :  </p>
 
     <!-- JavaScript -->
+
+    <div id="map"></div>
+
+    <!--script>
+      function initMap() {
+        var chicago = {lat: 41.85, lng: -87.65};
+        var indianapolis = {lat: 39.79, lng: -86.14};
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: chicago,
+          zoom: 7
+        });
+
+        var directionsDisplay = new google.maps.DirectionsRenderer({
+          map: map
+        });
+
+        // Set destination, origin and travel mode.
+        var request = {
+          destination: indianapolis,
+          origin: chicago,
+          travelMode: 'DRIVING'
+        };
+
+        // Pass the directions request to the directions service.
+        var directionsService = new google.maps.DirectionsService();
+        directionsService.route(request, function(response, status) {
+          if (status == 'OK') {
+            // Display the route on the map.
+            directionsDisplay.setDirections(response);
+          }
+        });
+      }
+
+    </script-->
+    <div id="map"></div>
+    <script src="{{ url_for('static',filename='js/test.js') }}"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKfyY5cw4Vl2Bg-DNoZ12lTNlAHpVMQN8&callback=initMap">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="{{ url_for('static',filename='js/getStations.js') }}"></script>
     <script src="{{ url_for('static',filename='js/searchSchedules.js') }}"></script>
     <script src="{{ url_for('static',filename='js/getStat.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/userSession.js') }}"></script>
+
   </body>
 </html>
+<!-- If nothin is selected, when refreshing error is throw.
+    the output needs to be cleared before displaying data again every 30 secs-->
