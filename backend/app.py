@@ -37,11 +37,11 @@ def trips():
     else:
         #url_fare="http://api.bart.gov/api/sched.aspx?cmd=fare&orig=12th&dest=embr&date=today&key=MW9S-E7SL-26DU-VV8V&json=y"
         #url_etd = "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=" + arg_source + "&key=MW9S-E7SL-26DU-VV8V&json=y"
-        url_eta = "http://api.bart.gov/api/sched.aspx?cmd=arrive&orig=" + arg_source + "&dest=" + arg_dest + "&key=MW9S-E7SL-26DU-VV8V&json=y"
+        url_eta = "http://api.bart.gov/api/sched.aspx?cmd=depart&orig=" + arg_source + "&dest=" + arg_dest + "&key=MW9S-E7SL-26DU-VV8V&a=4&b=0&json=y"
         response = requests.get(url_eta)
         return json.dumps({"data":response.json()["root"]["schedule"]["request"]["trip"]})
 
-@app.route('/etd')
+@app.route('/etd') #not used in code yet
 def etd():
     arg_source = request.args.get('source')
     if arg_source is None:

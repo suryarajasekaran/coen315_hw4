@@ -4,7 +4,7 @@
     <title>Hello World! Site Title</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <style>
+    <!--style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
@@ -30,7 +30,7 @@
         line-height: 30px;
         padding-left: 10px;
       }
-    </style>
+    </style-->
   </head>
   <body>
     <h1>Hello World!</h1>
@@ -59,13 +59,7 @@
 
     <p id = "Countdown"> Time left : </p>
 
-    <!--button id="session" type="button">click</button>
-
-    <p id="count"> Count :  </p>
-
     <!-- JavaScript -->
-
-    <div id="map"></div>
 
     <!--script>
       function initMap() {
@@ -100,15 +94,14 @@
 
     </script-->
     <div id="map"></div>
-    <script src="{{ url_for('static',filename='js/test.js') }}"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKfyY5cw4Vl2Bg-DNoZ12lTNlAHpVMQN8&callback=initMap">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="{{ url_for('static',filename='js/getStations.js') }}"></script>
     <script src="{{ url_for('static',filename='js/searchSchedules.js') }}"></script>
     <script src="{{ url_for('static',filename='js/getStat.js') }}"></script>
     <script src="{{ url_for('static',filename='js/userSession.js') }}"></script>
-
+    <script src="{{ url_for('static',filename='js/getmap.js') }}"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKfyY5cw4Vl2Bg-DNoZ12lTNlAHpVMQN8">
   </body>
 </html>
 <!-- If nothin is selected, when refreshing error is throw.
