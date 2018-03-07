@@ -2,6 +2,39 @@
 <html>
   <head>
     <title>Hello World! Site Title</title>
+
+      <style type="text/css">
+
+.float-left-area  {
+		  width: 70%;
+		  float: left;
+		  }
+
+.float-right-area {
+		  width: 30%;
+		  float: left;
+		  }
+
+.inner-left	  {
+		  padding: 5px 5px 5px 5px;
+		  margin-right: 10px;
+		  border: #999999 1px solid;
+		  min-height: 60px;
+		  }
+
+.inner-right	  {
+		  font-size: 11px;
+		  padding: 5px 5px 5px 5px;
+		  border: #999999 1px solid;
+		  min-height: 60px;
+		  }
+
+.clear-floated	  { clear: both; height: 1px; font-size: 1px; line-height: 1px; padding: 0; margin: 0; }
+
+</style>
+
+
+
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <!--style>
@@ -33,15 +66,17 @@
     </style-->
   </head>
   <body>
-    <h1>Hello World!</h1>
+    <h1>Bart</h1>
     <select id="departureStation">
-      <!--<option value="12th">Select</option>-->
+      <option>Select</option>
     </select>
     <select id="arrivalStation">
-      <!--<option value="24th">Select</option>-->
+      <option>Select</option>
     </select>
     <button id="searchSchedules" type="button">Search</button>
+
     <article id="results">
+
         <!--
         //REFRESH BEFORE PRINTING
         <section>
@@ -52,12 +87,26 @@
         -->
     </article>
 
-    <p id="StationInfo"></p>
 
-    <p id="session"> Message : </p>
+<p id = "testing">  </p>
+    <!--aside> <p id="StationInfo"></p> </aside-->
+
+
+<div class="float-right-area">
+<div class="inner-right">
+
+<aside id="StationInfo"> </aside>
+    <!--p id="StationInfo"> </p-->
+</div>
+</div>
+<div class="clear-floated"></div>
+
+
+
+    <!--p id="session"> Message : </--p-->
     <p id="count"> Count : </p>
 
-    <p id = "Countdown"> Time left : </p>
+    <p id = "Countdown"></p>
 
     <!-- JavaScript -->
 
@@ -95,6 +144,7 @@
     </script-->
     <div id="map"></div>
 
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="{{ url_for('static',filename='js/getStations.js') }}"></script>
     <script src="{{ url_for('static',filename='js/searchSchedules.js') }}"></script>
@@ -104,5 +154,13 @@
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKfyY5cw4Vl2Bg-DNoZ12lTNlAHpVMQN8">
   </body>
 </html>
-<!-- If nothin is selected, when refreshing error is throw.
-    the output needs to be cleared before displaying data again every 30 secs-->
+    <!-- 1.If nothin is selected, when refreshing error is throw. done,but check API 500 error
+    2.the output needs to be cleared before displaying data again every 30 secs, done
+    3.When departure time is 10:45, till it the current time is 10:46, the 30 sec refresh still shows 10:45 as the leg 1 departure time
+    4.The selection of the source station needs to be redone cause its has to be selected twice, done
+    5.same stations or missing, throw erroer mdsg, done
+    6.what is side bar?
+    7. on selectng stations second time, countdown is gettin messed up
+8.city nd zip code in station information
+    -->
+    -->
