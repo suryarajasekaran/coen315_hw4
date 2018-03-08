@@ -4,7 +4,7 @@ lng_dest = null;
 lat_org = null;
 lng_org = null;
 document.getElementById("map").innerHTML = " ";
-setInterval(function () {document.getElementById("searchSchedules").onclick();}, 300000);
+setInterval(function () {document.getElementById("searchSchedules").onclick();}, 30000);
 document.getElementById("searchSchedules").onclick = function () {
         var filterDepartureStation = document.getElementById("departureStation").value;
         var filterArrivalStation = document.getElementById("arrivalStation").value;
