@@ -1,5 +1,5 @@
 $.ajax({
-    url: 'http://0.0.0.0:8881/stations',
+    url: 'http://bartbknd.suryarajasekaran.com/stations',
     type: "GET",
     dataType: "json",
     data: {
