@@ -4,11 +4,16 @@ document.getElementById("searchSchedules").onclick = function () {
         var filterDepartureStation = document.getElementById("departureStation").value;
         var filterArrivalStation = document.getElementById("arrivalStation").value;
 
-        if (filterDepartureStation =='Select' || !filterArrivalStation=="Select") {
+        if (filterDepartureStation =='Select' || filterArrivalStation=="Select") {
             document.getElementById("results").innerHTML = "Select both Arrival and Departure station ";
+            clearInterval(intervalId);
+            document.getElementById("Countdown").innerHTML = " ";
+
         }
         else if ((filterDepartureStation!='Select') && ((filterDepartureStation==filterArrivalStation) || (filterArrivalStation==filterDepartureStation))) {
             document.getElementById("results").innerHTML = "Arrival and Departure stations cant be the same ";
+            document.getElementById("Countdown").innerHTML = " ";
+            clearInterval(intervalId);
         }
         else
         {
@@ -28,8 +33,19 @@ document.getElementById("searchSchedules").onclick = function () {
                     for(var i = 0; i < dataset.length; i++) {
                         var opt = document.createElement('option');
                         timer(dataset[0]["@origTimeMin"]);
-                        opt.innerHTML = "Leg "+(i+1)+": &emsp;|&emsp;Departure Time : " +String(dataset[i]["@origTimeMin"] + "&emsp;|&emsp;"+"Arrival Time : " + dataset[i]["@destTimeMin"] + "&emsp;|&emsp; Fare : " + dataset[i]["@fare"]);
-                        opt.value = String(dataset[i]["@origTimeMin"] + "&emsp;|&emsp;" + dataset[i]["@destTimeMin"] + "&emsp;|&emsp;" + dataset[i]["@fare"]);
+                        //opt.innerHTML = "Leg "+(i+1)+": &emsp;|&emsp;Departure Time : " +String(dataset[i]["@origTimeMin"] + "&emsp;|&emsp;"+"Arrival Time : " + dataset[i]["@destTimeMin"] + "&emsp;|&emsp; Fare : " + dataset[i]["@fare"]);
+                       opt.innerHTML = "Leg "+(i+1)+": &emsp;|&emsp;Departure Time : " +String(dataset[i]["@origTimeMin"] + "&emsp;|&emsp;"+"Arrival Time : " + dataset[i]["@destTimeMin"] + "&emsp;|&emsp; BART Blue Ticket Fare : " + dataset[i]["@fare"]
+                        + " &emsp;|&emsp; CO2 : " + dataset[i]["@co2"] +
+                         "&emsp;|&emsp; Estimated Minutes of trip : " + dataset[i]["@tripTime"]
+                        +"&emsp;|&emsp; Bike Flag : " + dataset[i].leg['@bikeflag'] +"&emsp;|&emsp; Line/Route number : " +dataset[i].leg["@line"]);
+
+                        opt.value = "Leg "+(i+1)+": &emsp;|&emsp;Departure Time : " +String(dataset[i]["@origTimeMin"] + "&emsp;|&emsp;"+"Arrival Time : " + dataset[i]["@destTimeMin"] + "&emsp;|&emsp; BART Blue Ticket Fare : " + dataset[i]["@fare"]
+                        + " &emsp;|&emsp; CO2 : " + dataset[i]["@co2"] +
+                         "&emsp;|&emsp; Estimated Minutes of trip : " + dataset[i]["@tripTime"]
+                        + "&emsp;|&emsp; Bike Flag : " + dataset[i].leg['@bikeflag'] +"&emsp;|&emsp; Line/Route number : " +dataset[i].leg["@line"]);
+
+
+                        //opt.value = String(dataset[i]["@origTimeMin"] + "&emsp;|&emsp;" + dataset[i]["@destTimeMin"] + "&emsp;|&emsp;" + dataset[i]["@fare"]);
                         results.appendChild(opt);
                     }
 
@@ -102,7 +118,6 @@ function timer(destTimeHours) {
             clearInterval(window.refreshIntervalId);
             document.getElementById("Countdown").innerHTML = "Your Train has departed";
         }
-
     }, 1000);
   };
 

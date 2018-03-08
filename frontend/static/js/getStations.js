@@ -17,14 +17,14 @@ $.ajax({
         var arrivalStation = document.getElementById('arrivalStation');
         for(var i = 0; i < dataset.length; i++) {
             var opt = document.createElement('option');
-            opt.innerHTML = dataset[i].abbr;
+            opt.innerHTML = dataset[i].name;
             opt.value = dataset[i].abbr;
            //departureStation.appendChild(opt);
             arrivalStation.appendChild(opt);
         };
         for(var i = 0; i < dataset.length; i++) {
             var opt = document.createElement('option');
-            opt.innerHTML = dataset[i].abbr;
+            opt.innerHTML = dataset[i].name;
             opt.value = dataset[i].abbr;
             departureStation.appendChild(opt);
         };

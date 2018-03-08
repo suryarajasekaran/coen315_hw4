@@ -5,16 +5,25 @@ if (typeof Storage !== "undefined") {
     document.getElementById("count").innerHTML ="Welcome back, you've been here " +localStorage.visitcount +
       " times before.";
     localStorage.visitcount = Number(localStorage.visitcount) + 1;
+document.getElementById("sessiontime").innerHTML = "Your previous visit was at " + localStorage.getItem("sessiontime");
+localStorage.setItem('sessiontime', new Date());
+
   } else {
     localStorage.visitcount = 1;
     document.getElementById("count").innerHTML =
       "This is your first time here! Welcome.";
+
+      document.getElementById("sessiontime").innerHTML=new Date();
+
+    localStorage.setItem('sessiontime', new Date());
+console.log("localstorage time now: " + localStorage.getItem("sessiontime"));
+console.log("localstorage visit count now: " + localStorage.sessiontime);
   }
   // document.getElementById("result").innerHTML = "You have clicked the button " + localStorage.clickcount + " time(s).";
 } else {
-   alert("Sorry, your browser does not support web storage.  Changes will not be saved");
+   alert("Sorry,use a different browser as your browser does not support web storage.");
   document.getElementById("count").innerHTML =
-    "Sorry, your browser does not support web storage...";
+    "Sorry, use a different browser as your browser does not support web storage...";
 }
 
 console.log("localstorage visit count now: " + localStorage.visitcount);

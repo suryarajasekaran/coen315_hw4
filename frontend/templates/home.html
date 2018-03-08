@@ -1,43 +1,19 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <title>Hello World! Site Title</title>
-
-      <style type="text/css">
-
-.float-left-area  {
-		  width: 70%;
-		  float: left;
-		  }
-
-.float-right-area {
-		  width: 30%;
-		  float: left;
-		  }
-
-.inner-left	  {
-		  padding: 5px 5px 5px 5px;
-		  margin-right: 10px;
-		  border: #999999 1px solid;
-		  min-height: 60px;
-		  }
-
-.inner-right	  {
-		  font-size: 11px;
-		  padding: 5px 5px 5px 5px;
-		  border: #999999 1px solid;
-		  min-height: 60px;
-		  }
-
-.clear-floated	  { clear: both; height: 1px; font-size: 1px; line-height: 1px; padding: 0; margin: 0; }
-
-</style>
-
-
-
+    <title>bart.gov</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <!--style>
+      <style type="text/css">
+        footer {
+            background-color: #FDFEFE;
+            width: 75%;
+            bottom: 0;
+            position: fixed;
+        }
+      </style>
+  </head>
+      <!--style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
@@ -64,73 +40,31 @@
         padding-left: 10px;
       }
     </style-->
-  </head>
+
   <body>
-    <h1>Bart</h1>
-    <select id="departureStation">
-      <option>Select</option>
-    </select>
-    <select id="arrivalStation">
-      <option>Select</option>
-    </select>
-    <button id="searchSchedules" type="button">Search</button>
-
-    <article id="results">
-
-        <!--
-        //REFRESH BEFORE PRINTING
-        <section>
-            <p id="resultFare" type="text"> Fare : </p> 
-            <p id="resultOrigin" type="text"> Origin : </p> 
-            <p id="resultDest" type="text"> Dest : </p>
-        </section>
-        -->
-    </article>
-
-
-<p id = "testing">  </p>
-    <!--aside> <p id="StationInfo"></p> </aside-->
-
-
-<div class="float-right-area">
-<div class="inner-right">
-
-<aside id="StationInfo"> </aside>
-    <!--p id="StationInfo"> </p-->
-</div>
-</div>
-<div class="clear-floated"></div>
-
-
-
+    <header><h1>Bart Website</h1></header>
     <!--p id="session"> Message : </--p-->
     <p id="count"> Count : </p>
-
-    <p id = "Countdown"></p>
+    <p id="sessiontime"></p>
 
     <!-- JavaScript -->
-
     <!--script>
       function initMap() {
         var chicago = {lat: 41.85, lng: -87.65};
         var indianapolis = {lat: 39.79, lng: -86.14};
-
         var map = new google.maps.Map(document.getElementById('map'), {
           center: chicago,
           zoom: 7
         });
-
         var directionsDisplay = new google.maps.DirectionsRenderer({
           map: map
         });
-
         // Set destination, origin and travel mode.
         var request = {
           destination: indianapolis,
           origin: chicago,
           travelMode: 'DRIVING'
         };
-
         // Pass the directions request to the directions service.
         var directionsService = new google.maps.DirectionsService();
         directionsService.route(request, function(response, status) {
@@ -140,27 +74,73 @@
           }
         });
       }
-
     </script-->
+
     <div id="map"></div>
+    <span id="clock"></span>
+	   <section style="float:left;width:75%;border:1px solid">
 
+           <b>Select departure and arrival stations below : </b> <br> <br>
+           <b>Departure Station</b>
+	        <select id="departureStation"><option>Select</option></select> &nbsp; &nbsp;
+           <b>Arrival Station</b>
+            <select id="arrivalStation"><option>Select</option></select><br> <br>
+           <button id="searchSchedules" type="button">Search</button> <br>
+  <pre>
+            <article id="results">
+            </article>
 
+            <p id = "Countdown"></p>
+        </pre>
+       </section>
+           <aside id = StationInfo style="font-style:italic;
+			float:right;width:20%;
+			border:1px solid">
+           <pre>
+                <p>Select source destination</p>
+               <p> to get more info</p>
+           </pre>
+           </aside>
+
+    <footer class="footer">
+    <p>Surya Rajasekaran's Bart website </p>
+    <p>For further details contact <a href="mailto:srajasekaran@scu.edu">srajasekaran@scu.edu</a>.</p>
+    </footer>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="{{ url_for('static',filename='js/getStations.js') }}"></script>
     <script src="{{ url_for('static',filename='js/searchSchedules.js') }}"></script>
     <script src="{{ url_for('static',filename='js/getStat.js') }}"></script>
     <script src="{{ url_for('static',filename='js/userSession.js') }}"></script>
     <script src="{{ url_for('static',filename='js/getmap.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/countdownWidget.js') }}"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKfyY5cw4Vl2Bg-DNoZ12lTNlAHpVMQN8">
   </body>
 </html>
-    <!-- 1.If nothin is selected, when refreshing error is throw. done,but check API 500 error
-    2.the output needs to be cleared before displaying data again every 30 secs, done
-    3.When departure time is 10:45, till it the current time is 10:46, the 30 sec refresh still shows 10:45 as the leg 1 departure time
-    4.The selection of the source station needs to be redone cause its has to be selected twice, done
-    5.same stations or missing, throw erroer mdsg, done
-    6.what is side bar?
-    7. on selectng stations second time, countdown is gettin messed up
-8.city nd zip code in station information
-    -->
-    -->
+    <!--
+     1.DONE : If nothin is selected, when refreshing error is throw. done,but check API 500 error, no error now
+     2.DONE : the output needs to be cleared before displaying data again every 30 secs
+     4. DONE : The selection of the source station needs to be redone cause its has to be selected twice
+     5. DONE : same stations or missing, throw erroer msg
+     7. RECHECK : on selectng stations second time, countdown is gettin messed up
+     8. DONE, MENTION : routes not defined if blank so not showin route in stationinfo, city nd zip code in station information
+     13. DONE : timer should be changed when null or select is selected
+     14. DONE : change the dropdown to names instead of abbr
+     16. DONE, RECHECK footer nd aside mixing at bottom issue
+     10. done : fares display all or only one type
+     6. done : what is side bar??
+
+     3. When departure time is 10:45, till it the current time is 10:46, the 30 sec refresh still shows 10:45 as the leg 1 departure time
+     11.show only the +ve train times, noghttime?
+     9.fix the countdown to take depature time greater than now
+     15.Change APIs??
+
+     12.more things should be displayed for the ui in trips call, make them with break line
+      19.google maps
+      20.widget
+      21.domain
+      22.
+
+      17.check with html w3 site
+      18.firefox nd chrome check final
+      19.The Same-Origin Policy Q
+  -->
