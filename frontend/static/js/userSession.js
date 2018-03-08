@@ -2,8 +2,8 @@
 
 if (typeof Storage !== "undefined") {
   if (localStorage.visitcount) {
-    document.getElementById("count").innerHTML ="Welcome back, you've been here " +localStorage.visitcount +
-      " times before.";
+    document.getElementById("count").innerHTML ="Welcome back, you have been here " +localStorage.visitcount +
+      " time/s before";
     localStorage.visitcount = Number(localStorage.visitcount) + 1;
 document.getElementById("sessiontime").innerHTML = "Your previous visit was at " + localStorage.getItem("sessiontime");
 localStorage.setItem('sessiontime', new Date());

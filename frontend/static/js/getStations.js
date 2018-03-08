@@ -11,7 +11,6 @@ $.ajax({
     crossDomain: true,
     cache: false,
     success: function (result) {
-        console.log(result);
         var dataset = result.data;
         var departureStation = document.getElementById('departureStation');
         var arrivalStation = document.getElementById('arrivalStation');

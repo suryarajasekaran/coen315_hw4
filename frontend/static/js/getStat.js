@@ -13,7 +13,6 @@ document.getElementById("departureStation").onchange = function () {
                 dataType: "json",
                 cache: false,
                 success: function (result) {
-                console.log(result);
                 var dataset = result.data;
                 //var StationInfo = document.getElementById("StationInfo").value;
                 //StationInfo.result.data;

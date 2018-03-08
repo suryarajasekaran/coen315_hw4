@@ -1,81 +1,55 @@
+<!-- The Same-Origin Policy : Websites, such as mine and many others are able to perform cross domain requests is because
+ they use CORS or JSONP. CORS or Cross Origin Resource Sharing is a process where restricted resources can be requested
+ by the ?? domain from another domain -->
+
 <!DOCTYPE HTML>
 <html>
-  <head>
-    <title>bart.gov</title>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-      <style type="text/css">
-        footer {
-            background-color: #FDFEFE;
-            width: 75%;
-            bottom: 0;
-            position: fixed;
-        }
-      </style>
-  </head>
-      <!--style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 40%;
-        width: 40%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #floating-panel {
-        position: absolute;
-        top: 10px;
-        left: 25%;
-        z-index: 5;
-        background-color: #fff;
-        padding: 5px;
-        border: 1px solid #999;
-        text-align: center;
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 10px;
-      }
-    </style-->
+    <head>
+        <title>bart.gov</title>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <style type="text/css">
+            footer {
+                background-color: #FDFEFE;
+                width: 75%;
+                bottom: 0;
+                position: fixed;
+            }
+        </style>
+        <style>
+            /* Always set the map height explicitly to define the size of the div
+            * element that contains the map. */
+            #map {
+            height: 40%;
+            width: 40%;
+            }
+            /* Optional: Makes the sample page fill the window. */
+            html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            }
+            #floating-panel {
+            position: absolute;
+            top: 10px;
+            left: 25%;
+            z-index: 5;
+            background-color: #fff;
+            padding: 5px;
+            border: 1px solid #999;
+            text-align: center;
+            font-family: 'Roboto','sans-serif';
+            line-height: 30px;
+            padding-left: 10px;
+            }
+        </style>
+    </head>
 
   <body>
     <header><h1>Bart Website</h1></header>
     <!--p id="session"> Message : </--p-->
     <p id="count"> Count : </p>
     <p id="sessiontime"></p>
-
-    <!-- JavaScript -->
-    <!--script>
-      function initMap() {
-        var chicago = {lat: 41.85, lng: -87.65};
-        var indianapolis = {lat: 39.79, lng: -86.14};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: chicago,
-          zoom: 7
-        });
-        var directionsDisplay = new google.maps.DirectionsRenderer({
-          map: map
-        });
-        // Set destination, origin and travel mode.
-        var request = {
-          destination: indianapolis,
-          origin: chicago,
-          travelMode: 'DRIVING'
-        };
-        // Pass the directions request to the directions service.
-        var directionsService = new google.maps.DirectionsService();
-        directionsService.route(request, function(response, status) {
-          if (status == 'OK') {
-            // Display the route on the map.
-            directionsDisplay.setDirections(response);
-          }
-        });
-      }
-    </script-->
-
     <div id="map"></div>
     <span id="clock"></span>
 	   <section style="float:left;width:75%;border:1px solid">
@@ -86,12 +60,12 @@
            <b>Arrival Station</b>
             <select id="arrivalStation"><option>Select</option></select><br> <br>
            <button id="searchSchedules" type="button">Search</button> <br>
-  <pre>
+            <pre>
             <article id="results">
             </article>
 
             <p id = "Countdown"></p>
-        </pre>
+            </pre>
        </section>
            <aside id = StationInfo style="font-style:italic;
 			float:right;width:20%;
@@ -111,36 +85,7 @@
     <script src="{{ url_for('static',filename='js/searchSchedules.js') }}"></script>
     <script src="{{ url_for('static',filename='js/getStat.js') }}"></script>
     <script src="{{ url_for('static',filename='js/userSession.js') }}"></script>
-    <script src="{{ url_for('static',filename='js/getmap.js') }}"></script>
     <script src="{{ url_for('static',filename='js/countdownWidget.js') }}"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKfyY5cw4Vl2Bg-DNoZ12lTNlAHpVMQN8">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKfyY5cw4Vl2Bg-DNoZ12lTNlAHpVMQN8"></script>
   </body>
 </html>
-    <!--
-     1.DONE : If nothin is selected, when refreshing error is throw. done,but check API 500 error, no error now
-     2.DONE : the output needs to be cleared before displaying data again every 30 secs
-     4. DONE : The selection of the source station needs to be redone cause its has to be selected twice
-     5. DONE : same stations or missing, throw erroer msg
-     7. RECHECK : on selectng stations second time, countdown is gettin messed up
-     8. DONE, MENTION : routes not defined if blank so not showin route in stationinfo, city nd zip code in station information
-     13. DONE : timer should be changed when null or select is selected
-     14. DONE : change the dropdown to names instead of abbr
-     16. DONE, RECHECK footer nd aside mixing at bottom issue
-     10. done : fares display all or only one type
-     6. done : what is side bar??
-
-     3. When departure time is 10:45, till it the current time is 10:46, the 30 sec refresh still shows 10:45 as the leg 1 departure time
-     11.show only the +ve train times, noghttime?
-     9.fix the countdown to take depature time greater than now
-     15.Change APIs??
-
-     12.more things should be displayed for the ui in trips call, make them with break line
-      19.google maps
-      20.widget
-      21.domain
-      22.
-
-      17.check with html w3 site
-      18.firefox nd chrome check final
-      19.The Same-Origin Policy Q
-  -->

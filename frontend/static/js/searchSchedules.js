@@ -1,5 +1,10 @@
 intervalId = null;
-setInterval(function () {document.getElementById("searchSchedules").onclick();}, 30000);
+lat_dest = null;
+lng_dest = null;
+lat_org = null;
+lng_org = null;
+document.getElementById("map").innerHTML = " ";
+setInterval(function () {document.getElementById("searchSchedules").onclick();}, 300000);
 document.getElementById("searchSchedules").onclick = function () {
         var filterDepartureStation = document.getElementById("departureStation").value;
         var filterArrivalStation = document.getElementById("arrivalStation").value;
@@ -8,80 +13,50 @@ document.getElementById("searchSchedules").onclick = function () {
             document.getElementById("results").innerHTML = "Select both Arrival and Departure station ";
             clearInterval(intervalId);
             document.getElementById("Countdown").innerHTML = " ";
+            document.getElementById("map").innerHTML = " ";
 
         }
         else if ((filterDepartureStation!='Select') && ((filterDepartureStation==filterArrivalStation) || (filterArrivalStation==filterDepartureStation))) {
             document.getElementById("results").innerHTML = "Arrival and Departure stations cant be the same ";
             document.getElementById("Countdown").innerHTML = " ";
             clearInterval(intervalId);
+            document.getElementById("map").innerHTML = " ";
         }
         else
         {
-        var getStationInfoGM = document.getElementById("departureStation").value;
-        $.ajax({
-                url: "http://0.0.0.0:8881/trips?source="+filterDepartureStation+"&dest="+filterArrivalStation,
-                type: "GET",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                cache: false,
-                success: function(result) {
-                    console.log(result);
-                    document.getElementById("results").innerHTML = " ";
-                    var dataset = result.data;
-                    var results = document.getElementById("results");
-                    var gmaps = document.getElementById("map");
-                    for(var i = 0; i < dataset.length; i++) {
-                        var opt = document.createElement('option');
-                        timer(dataset[0]["@origTimeMin"]);
-                        //opt.innerHTML = "Leg "+(i+1)+": &emsp;|&emsp;Departure Time : " +String(dataset[i]["@origTimeMin"] + "&emsp;|&emsp;"+"Arrival Time : " + dataset[i]["@destTimeMin"] + "&emsp;|&emsp; Fare : " + dataset[i]["@fare"]);
-                       opt.innerHTML = "Leg "+(i+1)+": &emsp;|&emsp;Departure Time : " +String(dataset[i]["@origTimeMin"] + "&emsp;|&emsp;"+"Arrival Time : " + dataset[i]["@destTimeMin"] + "&emsp;|&emsp; BART Blue Ticket Fare : " + dataset[i]["@fare"]
-                        + " &emsp;|&emsp; CO2 : " + dataset[i]["@co2"] +
-                         "&emsp;|&emsp; Estimated Minutes of trip : " + dataset[i]["@tripTime"]
-                        +"&emsp;|&emsp; Bike Flag : " + dataset[i].leg['@bikeflag'] +"&emsp;|&emsp; Line/Route number : " +dataset[i].leg["@line"]);
+            getLatLngDest(filterArrivalStation);
+            getLatLngOrigin(filterDepartureStation);
+            initMap();
+            $.ajax({
+                    url: "http://0.0.0.0:8881/trips?source="+filterDepartureStation+"&dest="+filterArrivalStation,
+                    type: "GET",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    cache: false,
+                    success: function(result) {
+                        document.getElementById("results").innerHTML = " ";
+                        var dataset = result.data;
+                        var results = document.getElementById("results");
+                        for(var i = 0; i < dataset.length; i++) {
+                            var opt = document.createElement('option');
+                            timer(dataset[0]["@origTimeMin"]);
+                           opt.innerHTML = "Leg "+(i+1)+": &emsp;|&emsp;Departure Time : " +String(dataset[i]["@origTimeMin"] + "&emsp;|&emsp;"+"Arrival Time : " + dataset[i]["@destTimeMin"] + "&emsp;|&emsp; BART Blue Ticket Fare : " + dataset[i]["@fare"]
+                            + " &emsp;|&emsp; CO2 : " + dataset[i]["@co2"] +
+                             "&emsp;|&emsp; Estimated Minutes of trip : " + dataset[i]["@tripTime"]
+                            +"&emsp;|&emsp; Bike Flag : " + dataset[i].leg['@bikeflag'] +"&emsp;|&emsp; Line/Route number : " +dataset[i].leg["@line"]);
 
-                        opt.value = "Leg "+(i+1)+": &emsp;|&emsp;Departure Time : " +String(dataset[i]["@origTimeMin"] + "&emsp;|&emsp;"+"Arrival Time : " + dataset[i]["@destTimeMin"] + "&emsp;|&emsp; BART Blue Ticket Fare : " + dataset[i]["@fare"]
-                        + " &emsp;|&emsp; CO2 : " + dataset[i]["@co2"] +
-                         "&emsp;|&emsp; Estimated Minutes of trip : " + dataset[i]["@tripTime"]
-                        + "&emsp;|&emsp; Bike Flag : " + dataset[i].leg['@bikeflag'] +"&emsp;|&emsp; Line/Route number : " +dataset[i].leg["@line"]);
+                            opt.value = "Leg "+(i+1)+": &emsp;|&emsp;Departure Time : " +String(dataset[i]["@origTimeMin"] + "&emsp;|&emsp;"+"Arrival Time : " + dataset[i]["@destTimeMin"] + "&emsp;|&emsp; BART Blue Ticket Fare : " + dataset[i]["@fare"]
+                            + " &emsp;|&emsp; CO2 : " + dataset[i]["@co2"] +
+                             "&emsp;|&emsp; Estimated Minutes of trip : " + dataset[i]["@tripTime"]
+                            + "&emsp;|&emsp; Bike Flag : " + dataset[i].leg['@bikeflag'] +"&emsp;|&emsp; Line/Route number : " +dataset[i].leg["@line"]);
+                            results.appendChild(opt);
+                        }
 
-
-                        //opt.value = String(dataset[i]["@origTimeMin"] + "&emsp;|&emsp;" + dataset[i]["@destTimeMin"] + "&emsp;|&emsp;" + dataset[i]["@fare"]);
-                        results.appendChild(opt);
-                    }
-
-
-                        /*var deptrain = dataset[0]["@origTimeMin"];
-                    $.ajax({
-                            url2: "http://0.0.0.0:8881/station?source="+getStationInfoGM,
-                            type: "GET",
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json",
-                            cache: false,
-                            success: function(result) {
-                                console.log(result);
-                                var gm = result.data;
-                                var gmaplat = document.createElement('option1');
-                                var gmaplong = document.createElement('option2');
-                                gmaplat.innerHTML = dataset[0].gtfs_latitude;
-                                gmaplat.value = dataset[0].gtfs_latitude;
-                                gmaplong.innerHTML = dataset[0].gtfs_longitude;
-                                gmaplong.value = dataset[0].gtfs_longitude;
-
-
-                           },
-                            error: function() {
-                            // Fail message
-                            console.log("error");
-                            },
-
-                  });*/
-
-                  },
-                error: function() {
-                    // Fail message
-                     console.log("error");
-                },
-        });
+                    },
+                    error: function() {
+                        console.log("error");
+                    },
+            });
         }
 };
 
@@ -139,31 +114,80 @@ function convert_to_24h(time_str) {
 
 
 function initMap() {
-        var directionsDisplay = new google.maps.DirectionsRenderer;
-        var directionsService = new google.maps.DirectionsService;
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 14,
-          center: {lat: 37.77, lng: -122.447}
-        });
-        directionsDisplay.setMap(map);
-
-        calculateAndDisplayRoute(directionsService, directionsDisplay);
-      }
+    console.log("init"+lat_org)
+    console.log("init"+lng_org)
+    if (lat_org == null || lat_dest == null || lng_org == null || lng_dest == null){
+        document.getElementById("map").innerHTML = " ";
+   }
+   else{
+   document.getElementById("map").innerHTML = " ";
+    var directionsDisplay = new google.maps.DirectionsRenderer;
+    var directionsService = new google.maps.DirectionsService;
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 14,
+      center: {lat: lat_org, lng: lng_org}
+    });
+    directionsDisplay.setMap(map);
+    calculateAndDisplayRoute(directionsService, directionsDisplay);
+  }
+}
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+    console.log("calc"+lat_org)
+    console.log("calc"+lng_org)
     var selectedMode = "TRANSIT";
     directionsService.route({
-      origin: {lat: 37.77, lng: -122.447},  // Haight.
-      destination: {lat: 37.768, lng: -122.511},  // Ocean Beach.
-      // Note that Javascript allows us to access the constant
-      // using square brackets and a string value as its
-      // "property."
-      travelMode: google.maps.TravelMode[selectedMode]
+      origin: {lat: lat_org, lng: lng_org},
+      destination: {lat: lat_dest, lng: lng_dest},
+      travelMode: google.maps.TravelMode[selectedMode],
+      transitOptions: {
+        modes: ['RAIL']
+      },
     }, function(response, status) {
       if (status == 'OK') {
         directionsDisplay.setDirections(response);
       } else {
         window.alert('Directions request failed due to ' + status);
       }
+    });
+}
+
+function getLatLngOrigin(station){
+    $.ajax({
+        url: "http://0.0.0.0:8881/station?source="+station,
+        type: "GET",
+        async: false,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        cache: false,
+        success: function(result) {
+            lat_org = parseFloat(result.data.gtfs_latitude);
+            lng_org = parseFloat(result.data.gtfs_longitude);
+            console.log("get"+lat_org)
+            console.log("get"+lng_org)
+       },
+        error: function() {
+            console.log("error");
+        },
+
+    });
+}
+
+function getLatLngDest(station){
+    $.ajax({
+        url: "http://0.0.0.0:8881/station?source="+station,
+        type: "GET",
+        async: false,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        cache: false,
+        success: function(result) {
+            lat_dest = parseFloat(result.data.gtfs_latitude);
+            lng_dest = parseFloat(result.data.gtfs_longitude);
+       },
+        error: function() {
+            console.log("error");
+        },
+
     });
 }
