@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p id="reset">
+  The system will be reset
+  <time datetime="2010-05-05T7:13Z">every 20 minutes.</time>
+</p>
+
+<script>
+  jQuery(function($){
+    // Initialize our plugin on all time elements
+    $("time").countdown();
+  });
+</script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script src="js/jquery.ui.widget.js"></script>
+<script src="js/jquery.pixel.countdown.js"></script>
+<script src="js/jquery.countdown.js"></script>
+</body>
+</html>

@@ -1,35 +1,90 @@
+<!-- The Same-Origin Policy : Websites, such as mine and many others are able to perform cross domain requests is because
+ they use CORS or JSONP. CORS or Cross Origin Resource Sharing is a process where restricted resources can be requested
+ by the ?? domain from another domain -->
+
 <!DOCTYPE HTML>
 <html>
-  <head>
-    <title>Hello World! Site Title</title>
-  </head>
+    <head>
+        <title>bart.gov</title>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <style type="text/css">
+            footer {
+                background-color: #FDFEFE;
+                width: 75%;
+                bottom: 0;
+                left: 0;
+                position: fixed;
+            }
+        </style>
+        <style>
+            /* Always set the map height explicitly to define the size of the div
+            * element that contains the map. */
+            #map {
+            height: 40%;
+            width: 40%;
+            }
+            /* Optional: Makes the sample page fill the window. */
+            html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            }
+            #floating-panel {
+            position: absolute;
+            top: 10px;
+            left: 25%;
+            z-index: 5;
+            background-color: #fff;
+            padding: 5px;
+            border: 1px solid #999;
+            text-align: center;
+            font-family: 'Roboto','sans-serif';
+            line-height: 30px;
+            padding-left: 10px;
+            }
+        </style>
+    </head>
+
   <body>
-    <h1>Hello World!</h1>
-    <select id="departureStation">
-      <!--<option value="12th">Select</option>-->
-    </select>
-    <select id="arrivalStation">
-      <!--<option value="24th">Select</option>-->
-    </select>
-    <button id="searchSchedules" type="button">Search</button>
+    <header><h1>Bart Website</h1></header>
+    <!--p id="session"> Message : </--p-->
+    <p id="count"> Count : </p>
+    <p id="sessiontime"></p>
+	   <section style="float:left;width:75%;border:1px solid">
 
-    <article id="results">
-        <!--
-        <section>
-            <p id="resultFare" type="text"> Fare : </p> 
-            <p id="resultOrigin" type="text"> Origin : </p> 
-            <p id="resultDest" type="text"> Dest : </p>
-        </section>
-        -->
-    </article>
-    <button id="session" type="button">click</button>
-    <p id="count"> Count :  </p>
+           <b>Select departure and arrival stations below : </b> <br> <br>
+           <b>Departure Station</b>
+	        <select id="departureStation"><option>Select</option></select> &nbsp; &nbsp;
+           <b>Arrival Station</b>
+            <select id="arrivalStation"><option>Select</option></select><br> <br>
+           <button id="searchSchedules" type="button">Search</button> <br>
+            <pre>
+            <article id="results">
+            </article>
 
-    <!-- JavaScript -->
-
+            <p id = "Countdown"></p>
+            </pre>
+       </section>
+           <aside id = StationInfo style="font-style:italic;
+			float:right;width:20%;
+			border:1px solid">
+           <pre>
+                <p>Select source destination</p>
+               <p> to get more info</p>
+           </pre>
+           </aside>
+    <div id="map"></div>
+    <footer class="footer">
+    <p>Surya Rajasekaran's Bart website </p>
+    <p>For further details contact <a href="mailto:srajasekaran@scu.edu">srajasekaran@scu.edu</a>.</p>
+    </footer>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="{{ url_for('static',filename='js/getStations.js') }}"></script>
     <script src="{{ url_for('static',filename='js/searchSchedules.js') }}"></script>
     <script src="{{ url_for('static',filename='js/getStat.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/userSession.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/countdownWidget.js') }}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKfyY5cw4Vl2Bg-DNoZ12lTNlAHpVMQN8"></script>
   </body>
 </html>
