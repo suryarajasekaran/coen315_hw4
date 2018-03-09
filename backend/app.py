@@ -6,7 +6,10 @@ import requests
 
 app = Flask(__name__)
 api = Api(app)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
+app.config["CORS_SUPPORTS_CREDENTIALS"]=True
+app.config["CORS_ALLOW_HEADERS"] = True
+app.config["CORS_EXPOSE_HEADERS"] = True
 
 @app.route('/ping')
 def ping():
@@ -51,6 +54,7 @@ def etd():
         response = requests.get(url_etd)
         return json.dumps({"data":response.json()["root"]["station"]})
 
+'''
 @app.after_request
 def after_request(response):
   response.headers.add('Access-Control-Allow-Origin', request.headers.get('Origin','*'))
@@ -58,6 +62,7 @@ def after_request(response):
   response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
   response.headers.add('Access-Control-Allow-Credentials', 'true')
   return response
+'''
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8881, debug=True)
