@@ -10,12 +10,12 @@
         <title>bart.gov</title>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
-        <style type="text/css">
+        <style>
             footer {
                 background-color: #FDFEFE;
                 width: 75%;
                 bottom: 0;
-                height: 10;
+
                 left: 0;
                 position: fixed;
                 background-color:#ADD8E6;
@@ -25,6 +25,12 @@
 }
 
         </style>
+        <style>
+body {
+    background-color: "#ADD8E6";
+}
+</style>
+
         <style>
             /* Always set the map height explicitly to define the size of the div
             * element that contains the map. */
@@ -55,9 +61,9 @@
     </head>
 
 
-  <body bgcolor="#ADD8E6">
+  <body>
     <header>
-         <tab1> <img src="../static/img/barttrain.jpeg"> </tab1>
+          <img src="../static/img/barttrain.jpeg" alt="barttrain">
         <!--img src="../static/img/bartlogo.png">
         <tab1> <img src="../static/img/bartTrainUsed.JPG"> </tab1>
     <tab1> <img src="../static/img/bartmap.png"> </tab1-->
@@ -84,17 +90,17 @@
            <p id="bike">  </p>
            <p id="lineno"> </p>
 
-         <pre>
+<!--pre-->
             <p id = "Countdown"></p>
-            </pre>
+
        </section>
            <aside id = StationInfo style="font-style:italic;
 			float:right;width:20%;
 			border:1px solid">
-           <pre>
+
                 <p>Select source destination</p>
                <p> to get more info</p>
-           </pre>
+
            </aside>
     <div id="map"></div>
     <footer class="footer">
