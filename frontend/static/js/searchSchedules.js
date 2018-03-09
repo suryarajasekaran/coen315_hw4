@@ -29,7 +29,7 @@ document.getElementById("searchSchedules").onclick = function () {
             getLatLngOrigin(filterDepartureStation);
             initMap();
             $.ajax({
-                    url: "http://suryarajasekaran.com:8881/trips?source="+filterDepartureStation+"&dest="+filterArrivalStation,
+                    url: "http://bartbknd.suryarajasekaran.com/trips?source="+filterDepartureStation+"&dest="+filterArrivalStation,
                     type: "GET",
                     //contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -160,7 +160,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 
 function getLatLngOrigin(station){
     $.ajax({
-        url: "http://suryarajasekaran.com:8881/station?source="+station,
+        url: "http://bartbknd.suryarajasekaran.com/station?source="+station,
         type: "GET",
         async: false,
         //contentType: "application/json; charset=utf-8",
@@ -181,7 +181,7 @@ function getLatLngOrigin(station){
 
 function getLatLngDest(station){
     $.ajax({
-        url: "http://suryarajasekaran.com:8881/station?source="+station,
+        url: "http://bartbknd.suryarajasekaran.com/station?source="+station,
         type: "GET",
         async: false,
         //contentType: "application/json; charset=utf-8",

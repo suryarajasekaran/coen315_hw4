@@ -1,7 +1,7 @@
 //JS to populate/abbreviations names of  all stations
 
 $.ajax({
-    url: 'http://suryarajasekaran.com:8881/stations',
+    url: 'http://bartbknd.suryarajasekaran.com/stations',
     type: "GET",
     dataType: "json",
     data: {

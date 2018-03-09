@@ -8,7 +8,7 @@ document.getElementById("departureStation").onchange = function () {
         else{
 
         $.ajax({
-                url: "http://suryarajasekaran.com:8881/station?source="+getStationInfo,
+                url: "http://bartbknd.suryarajasekaran.com/station?source="+getStationInfo,
                 type: "GET",
                 //contentType: "application/json; charset=utf-8",
                 dataType: "json",
