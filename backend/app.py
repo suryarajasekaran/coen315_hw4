@@ -4,21 +4,22 @@ from flask_cors import CORS, cross_origin
 import json
 import requests
 
+origin_str = 'http://suryarajasekaran.com:8882'
 app = Flask(__name__)
 api = Api(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config["CORS_SUPPORTS_CREDENTIALS"]=True
 app.config["CORS_ALLOW_HEADERS"] = True
 app.config["CORS_EXPOSE_HEADERS"] = True
-CORS(app, resources={r"/*": {"origins": "http://suryarajasekaran.com:8882"}})
+CORS(app, resources={r"/*": {"origins": origin_str}})
 
 @app.route('/ping')
-@cross_origin(origin='http://suryarajasekaran.com:8882')
+@cross_origin(origin=origin_str)
 def ping():
     return json.dumps({"status":True})
 
 @app.route('/station')
-@cross_origin(origin='http://suryarajasekaran.com:8882')
+@cross_origin(origin=origin_str)
 def station():
     arg_source = request.args.get('source')
     if arg_source is None:
@@ -29,14 +30,14 @@ def station():
         return json.dumps({"data": response.json()["root"]["stations"]["station"]})
 
 @app.route('/stations')
-@cross_origin(origin='http://suryarajasekaran.com:8882')
+@cross_origin(origin=origin_str)
 def stations():
     url="http://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V&json=y"
     response = requests.get(url)
     return json.dumps({"data":response.json()["root"]["stations"]["station"]})
 
 @app.route('/trips')
-@cross_origin(origin='http://suryarajasekaran.com:8882')
+@cross_origin(origin=origin_str)
 def trips():
     arg_source = request.args.get('source')
     arg_dest = request.args.get('dest')
@@ -50,7 +51,7 @@ def trips():
         return json.dumps({"data":response.json()["root"]["schedule"]["request"]["trip"]})
 
 @app.route('/etd') #not used in code yet
-@cross_origin(origin='http://suryarajasekaran.com:8882')
+@cross_origin(origin=origin_str)
 def etd():
     arg_source = request.args.get('source')
     if arg_source is None:
@@ -62,7 +63,7 @@ def etd():
 
 @app.after_request
 def after_request(response):
-  response.headers.add('Access-Control-Allow-Origin', request.headers.get('Origin','http://suryarajasekaran.com:8882'))
+  response.headers.add('Access-Control-Allow-Origin', request.headers.get('Origin', origin_str))
   response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
   response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
   response.headers.add('Access-Control-Allow-Credentials', 'true')
