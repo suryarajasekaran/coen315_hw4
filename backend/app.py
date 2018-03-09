@@ -10,7 +10,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 app.config["CORS_SUPPORTS_CREDENTIALS"]=True
 app.config["CORS_ALLOW_HEADERS"] = True
 app.config["CORS_EXPOSE_HEADERS"] = True
-CORS(app, resources={r"/*": {"origins": "http://0.0.0.0:8882"}})
+CORS(app, resources={r"/*": {"origins": "http://suryarajasekaran.com:8882"}})
 
 @app.route('/ping')
 @cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
