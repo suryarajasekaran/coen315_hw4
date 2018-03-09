@@ -6,10 +6,11 @@ import requests
 
 app = Flask(__name__)
 api = Api(app)
-CORS(app, resources={r"/*": {"origins": "*"}})
+app.config['CORS_HEADERS'] = 'Content-Type'
 app.config["CORS_SUPPORTS_CREDENTIALS"]=True
 app.config["CORS_ALLOW_HEADERS"] = True
 app.config["CORS_EXPOSE_HEADERS"] = True
+CORS(app, resources={r"/*": {"origins": "http://0.0.0.0:8882"}})
 
 @app.route('/ping')
 def ping():
