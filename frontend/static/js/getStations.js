@@ -1,6 +1,7 @@
 $.ajax({
     url: 'http://suryarajasekaran.com:8881/stations',
     type: "GET",
+    dataType: "json",
     data: {
     },
     contentType: "application/json; charset=utf-8",
