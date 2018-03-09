@@ -4,8 +4,7 @@ from flask_cors import CORS, cross_origin
 import json
 import requests
 
-#origin_str = 'http://suryarajasekaran.com:8882'
-origin_str = 'http://bart.suryarajasekaran.com'
+origin_str = 'http://suryarajasekaran.com:8882'
 app = Flask(__name__)
 api = Api(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
