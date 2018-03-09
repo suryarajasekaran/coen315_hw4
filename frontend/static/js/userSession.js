@@ -1,4 +1,4 @@
-//add and edit comments and make it look more like your own code
+
 
 if (typeof Storage !== "undefined") {
   if (localStorage.visitcount) {
@@ -13,7 +13,8 @@ localStorage.setItem('sessiontime', new Date());
     document.getElementById("count").innerHTML =
       "This is your first time here! Welcome.";
 
-      document.getElementById("sessiontime").innerHTML=new Date();
+
+      document.getElementById("sessiontime").innerHTML= "Time of your first visit is "+ new Date();
 
     localStorage.setItem('sessiontime', new Date());
 console.log("localstorage time now: " + localStorage.getItem("sessiontime"));

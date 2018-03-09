@@ -1,3 +1,4 @@
+//JS search for route and display real time dearture dates, trip info and
 intervalId = null;
 lat_dest = null;
 lng_dest = null;
@@ -37,18 +38,23 @@ document.getElementById("searchSchedules").onclick = function () {
                         document.getElementById("results").innerHTML = " ";
                         var dataset = result.data;
                         var results = document.getElementById("results");
+                        var fare,CO2,timetaken,bike,lineno;
+
+                        var timenow = new Date();
+
                         for(var i = 0; i < dataset.length; i++) {
                             var opt = document.createElement('option');
-                            timer(dataset[0]["@origTimeMin"]);
-                           opt.innerHTML = "Leg "+(i+1)+": &emsp;|&emsp;Departure Time : " +String(dataset[i]["@origTimeMin"] + "&emsp;|&emsp;"+"Arrival Time : " + dataset[i]["@destTimeMin"] + "&emsp;|&emsp; BART Blue Ticket Fare : " + dataset[i]["@fare"]
-                            + " &emsp;|&emsp; CO2 : " + dataset[i]["@co2"] +
-                             "&emsp;|&emsp; Estimated Minutes of trip : " + dataset[i]["@tripTime"]
-                            +"&emsp;|&emsp; Bike Flag : " + dataset[i].leg['@bikeflag'] +"&emsp;|&emsp; Line/Route number : " +dataset[i].leg["@line"]);
 
-                            opt.value = "Leg "+(i+1)+": &emsp;|&emsp;Departure Time : " +String(dataset[i]["@origTimeMin"] + "&emsp;|&emsp;"+"Arrival Time : " + dataset[i]["@destTimeMin"] + "&emsp;|&emsp; BART Blue Ticket Fare : " + dataset[i]["@fare"]
-                            + " &emsp;|&emsp; CO2 : " + dataset[i]["@co2"] +
-                             "&emsp;|&emsp; Estimated Minutes of trip : " + dataset[i]["@tripTime"]
-                            + "&emsp;|&emsp; Bike Flag : " + dataset[i].leg['@bikeflag'] +"&emsp;|&emsp; Line/Route number : " +dataset[i].leg["@line"]);
+                           document.getElementById("fares").innerHTML =" <h5>For the selected stations,<br> </h5> BART Blue Ticket Fare :" + String(dataset[0]["@fare"]);
+                           document.getElementById("CO2").innerHTML ="CO2 emission is : " + String(dataset[0]["@co2"]);
+                           document.getElementById("timetaken").innerHTML = "Estimated Minutes of trip :" + String(dataset[0]["@tripTime"]);
+                            timer(dataset[0]["@origTimeMin"]);
+
+                        opt.innerHTML = "Leg "+(i+1)+": <br> &emsp;|&emsp;Departure Time : " +String(dataset[i]["@origTimeMin"] + "&emsp;|&emsp;"+"Arrival Time : " + dataset[i]["@destTimeMin"]);
+
+dataset[0].leg['@bikeflag']
+
+                            opt.value = "Leg "+(i+1)+": &emsp;|&emsp;Departure Time : " +String(dataset[i]["@origTimeMin"] + "&emsp;|&emsp;"+"Arrival Time : " + dataset[i]["@destTimeMin"]);
                             results.appendChild(opt);
                         }
 

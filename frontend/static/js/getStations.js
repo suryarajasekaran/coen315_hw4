@@ -1,3 +1,5 @@
+//JS to populate/abbreviations names of  all stations
+
 $.ajax({
     url: 'http://suryarajasekaran.com:8881/stations',
     type: "GET",
