@@ -2,6 +2,7 @@ $.ajax({
     url: 'http://suryarajasekaran.com:8881/stations',
     type: "GET",
     dataType: "json",
+    headers: {"Access-Control-Allow-Origin": "http://suryarajasekaran.com:8882"},
     data: {
     },
     contentType: "application/json; charset=utf-8",
