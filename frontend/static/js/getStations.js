@@ -4,7 +4,7 @@ $.ajax({
     dataType: "json",
     data: {
     },
-    contentType: "application/json; charset=utf-8",
+    //contentType: "application/json; charset=utf-8",
     xhrFields: {
                    withCredentials: true
                 },
