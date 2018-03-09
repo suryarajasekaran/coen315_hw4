@@ -39,7 +39,7 @@ document.getElementById("searchSchedules").onclick = function () {
         $.ajax({
                 url: "http://suryarajasekaran.com:8881/trips?source="+filterDepartureStation+"&dest="+filterArrivalStation,
                 type: "GET",
-                contentType: "application/json; charset=utf-8",
+                //contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 cache: false,
                 success: function(result) {

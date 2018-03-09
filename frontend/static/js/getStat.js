@@ -9,7 +9,7 @@ document.getElementById("departureStation").onchange = function () {
         $.ajax({
                 url: "http://suryarajasekaran.com:8881/station?source="+getStationInfo,
                 type: "GET",
-                contentType: "application/json; charset=utf-8",
+                //contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 cache: false,
                 success: function (result) {
