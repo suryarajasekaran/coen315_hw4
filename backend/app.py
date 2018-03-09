@@ -13,10 +13,12 @@ app.config["CORS_EXPOSE_HEADERS"] = True
 CORS(app, resources={r"/*": {"origins": "http://0.0.0.0:8882"}})
 
 @app.route('/ping')
+@cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
 def ping():
     return json.dumps({"status":True})
 
 @app.route('/station')
+@cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
 def station():
     arg_source = request.args.get('source')
     if arg_source is None:
@@ -27,12 +29,14 @@ def station():
         return json.dumps({"data": response.json()["root"]["stations"]["station"]})
 
 @app.route('/stations')
+@cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
 def stations():
     url="http://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V&json=y"
     response = requests.get(url)
     return json.dumps({"data":response.json()["root"]["stations"]["station"]})
 
 @app.route('/trips')
+@cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
 def trips():
     arg_source = request.args.get('source')
     arg_dest = request.args.get('dest')
@@ -46,6 +50,7 @@ def trips():
         return json.dumps({"data":response.json()["root"]["schedule"]["request"]["trip"]})
 
 @app.route('/etd') #not used in code yet
+@cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
 def etd():
     arg_source = request.args.get('source')
     if arg_source is None:
