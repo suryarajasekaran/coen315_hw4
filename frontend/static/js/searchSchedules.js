@@ -46,6 +46,7 @@ document.getElementById("searchSchedules").onclick = function () {
                         var timenow = new Date();
 
                         for(var i = 0; i < dataset.length; i++) {
+
                             var opt = document.createElement('option');
 
                            document.getElementById("fares").innerHTML =" <h5>For the selected stations,<br> </h5> BART Blue Ticket Fare :" + String(dataset[0]["@fare"]);
@@ -59,6 +60,7 @@ dataset[0].leg['@bikeflag']
 
                             opt.value = "Leg "+(i+1)+": &emsp;|&emsp;Departure Time : " +String(dataset[i]["@origTimeMin"] + "&emsp;|&emsp;"+"Arrival Time : " + dataset[i]["@destTimeMin"]);
                             results.appendChild(opt);
+
                         }
 
                     },
@@ -204,7 +206,7 @@ function getLatLngDest(station){
     });
 }
 
-// inputTime -> "2017/01/01"
+
 function addWidget(inputTime) {
     $("#getting-started")
     .countdown(inputTime, function(event) {
@@ -214,13 +216,19 @@ function addWidget(inputTime) {
   });
 }
 
-// inputTime -> "2017/01/01"
+
 function addWidgetFlip(year, month, day, hour, min) {
     document.getElementById("flipwidget").innerHTML = " ";
     var eventDate = new Date(year,month,day,hour,min);
-    var clock = $('.your-clock').FlipClock(eventDate, {
+    var datetest = (new Date(eventDate).getTime() - new Date().getTime()) / 1000;
+    if (datetest >0){
+
+    console.log(datetest);
+    var clock = $('.your-clock').FlipClock(datetest, {
         clockFace: 'DailyCounter',
-        countdown: true,
-        autoStart: true
+        countdown: true
     });
+    console.log(clock);
+    }
+    else document.getElementById("flipwidget").innerHTML = "Your Train has departed ";
 }
