@@ -10,6 +10,7 @@
         <title>bart.gov</title>
         <!--<meta name="viewport" content="initial-scale=1.0, user-scalable=no">-->
         <meta charset="utf-8">
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/flipclock.css') }}">
         <style>
             footer {
                 background-color: #FDFEFE;
@@ -69,6 +70,8 @@ body {
     <tab1> <img src="../static/img/bartmap.png"> </tab1-->
     </header>
 
+    <div id="getting-started"></div>
+    <div class="your-clock" id="flipwidget"></div>
     <!--p id="session"> Message : <p-->
     <p id="count"> Count : </p>
     <p id="sessiontime"> </p>
@@ -112,6 +115,8 @@ body {
     <script src="{{ url_for('static',filename='js/searchSchedules.js') }}"></script>
     <script src="{{ url_for('static',filename='js/getStat.js') }}"></script>
     <script src="{{ url_for('static',filename='js/userSession.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/flipclock.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/flipclock.min.js') }}"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3LKHtr3-a2SyGDiTPF-LnptvTe-lcySY"></script>
   </body>
 </html>
