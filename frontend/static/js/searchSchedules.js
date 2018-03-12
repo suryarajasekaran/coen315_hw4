@@ -5,6 +5,7 @@ lng_dest = null;
 lat_org = null;
 lng_org = null;
 document.getElementById("map").innerHTML = " ";
+document.getElementById("flipwidget").innerHTML = " ";
 setInterval(function () {document.getElementById("searchSchedules").onclick();}, 30000);
 document.getElementById("searchSchedules").onclick = function () {
         var filterDepartureStation = document.getElementById("departureStation").value;
@@ -15,6 +16,7 @@ document.getElementById("searchSchedules").onclick = function () {
             clearInterval(intervalId);
             document.getElementById("Countdown").innerHTML = " ";
             document.getElementById("map").innerHTML = " ";
+            document.getElementById("flipwidget").innerHTML = " ";
 
         }
         else if ((filterDepartureStation!='Select') && ((filterDepartureStation==filterArrivalStation) || (filterArrivalStation==filterDepartureStation))) {
@@ -22,6 +24,7 @@ document.getElementById("searchSchedules").onclick = function () {
             document.getElementById("Countdown").innerHTML = " ";
             clearInterval(intervalId);
             document.getElementById("map").innerHTML = " ";
+            document.getElementById("flipwidget").innerHTML = " ";
         }
         else
         {
@@ -76,6 +79,9 @@ function timer(destTimeHours) {
     var min = convert_to_24h(destTimeHours)[1]
     // Set the date we're counting down to
     var countDownDate = new Date(year,month,day,hour,min).getTime();
+    // added widget with time
+    //addWidget(year+"/"+month+"/"+day+" "+hour+":"+min+":00")
+    addWidgetFlip(year,month,day,hour,min)
     // Update the count down every 1 second
     var x = setInterval(function() {
         if (intervalId != x && intervalId != null){
@@ -195,5 +201,26 @@ function getLatLngDest(station){
             console.log("error");
         },
 
+    });
+}
+
+// inputTime -> "2017/01/01"
+function addWidget(inputTime) {
+    $("#getting-started")
+    .countdown(inputTime, function(event) {
+    $(this).text(
+        event.strftime('%D days %H:%M:%S')
+    );
+  });
+}
+
+// inputTime -> "2017/01/01"
+function addWidgetFlip(year, month, day, hour, min) {
+    document.getElementById("flipwidget").innerHTML = " ";
+    var eventDate = new Date(year,month,day,hour,min);
+    var clock = $('.your-clock').FlipClock(eventDate, {
+        clockFace: 'DailyCounter',
+        countdown: true,
+        autoStart: true
     });
 }
