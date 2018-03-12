@@ -7,7 +7,7 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title>bart.gov</title>
+        <title>bart.suryarajasekaran.com</title>
         <!--<meta name="viewport" content="initial-scale=1.0, user-scalable=no">-->
         <meta charset="utf-8">
         <style>
@@ -15,21 +15,21 @@
                 background-color: #FDFEFE;
                 width: 75%;
                 bottom: 0;
-
+                height:60px;
                 left: 0;
-                position: fixed;
+                position: absolute;
                 background-color:#ADD8BC;
             }
             p {
-    white-space: nowrap;
-}
-
+                white-space: nowrap;
+            }
+        body {
+           background-color: #ADD8E6;
+           margin:0;
+            padding:60x;
+            height:100%;
+        }
         </style>
-        <style>
-body {
-    background-color: #ADD8E6;
-}
-</style>
 
         <style>
             /* Always set the map height explicitly to define the size of the div
@@ -63,7 +63,8 @@ body {
 
   <body>
     <header>
-          <img src="../static/img/barttrain.jpeg" alt="barttrain">
+        <image src="../static/img/bartlogo.png" alt="logo"> BART : Bay Area Rapid Transit
+        <image src="../static/img/barttrain.jpeg" alt="barttrain">
         <!--img src="../static/img/bartlogo.png">
         <tab1> <img src="../static/img/bartTrainUsed.JPG"> </tab1>
     <tab1> <img src="../static/img/bartmap.png"> </tab1-->
@@ -74,7 +75,7 @@ body {
     <p id="sessiontime"> </p>
 	   <section style="float:left;width:75%;border:1px solid">
 
-           <b>Select departure and arrival stations below : </b> <br> <br>
+           <h5>Select departure and arrival stations below : </h5> <br>
            <b>Departure Station :</b>
 	        <select id="departureStation"><option>Select</option></select> &nbsp; &nbsp;
            <br><b>Arrival Station :</b>

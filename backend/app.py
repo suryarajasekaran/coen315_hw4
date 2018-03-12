@@ -4,6 +4,8 @@ from flask_cors import CORS, cross_origin
 import json
 import requests
 
+#python file to create own APIs using BART APIs
+
 origin_str = "*" # 'http://suryarajasekaran.com:8882'
 app = Flask(__name__)
 api = Api(app)
@@ -50,7 +52,7 @@ def trips():
         response = requests.get(url_eta)
         return json.dumps({"data":response.json()["root"]["schedule"]["request"]["trip"]})
 
-@app.route('/etd') #not used in code yet
+@app.route('/etd') #not used in my code yet
 @cross_origin(origin=origin_str)
 def etd():
     arg_source = request.args.get('source')

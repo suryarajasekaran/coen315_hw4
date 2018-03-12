@@ -1,4 +1,4 @@
-//JS to populate/abbreviations names of  all stations
+//JS to populate abbreviations/names of  all stations
 
 $.ajax({
     url: 'http://suryarajasekaran.com:8881/stations',
@@ -20,7 +20,6 @@ $.ajax({
             var opt = document.createElement('option');
             opt.innerHTML = dataset[i].name;
             opt.value = dataset[i].abbr;
-           //departureStation.appendChild(opt);
             arrivalStation.appendChild(opt);
         };
         for(var i = 0; i < dataset.length; i++) {
@@ -31,11 +30,9 @@ $.ajax({
         };
     },
     error: function () {
-        console.log("error");
+        console.log("get Station.js error");
     }
 });
-
-
 
 $(function(){
     $.getJSON('', function(data) {

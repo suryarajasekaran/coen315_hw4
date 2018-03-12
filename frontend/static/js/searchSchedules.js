@@ -1,4 +1,4 @@
-//JS search for route and display real time dearture dates, trip info and
+//JS search for route and display real time departure dates, trip info and
 intervalId = null;
 lat_dest = null;
 lng_dest = null;
@@ -39,61 +39,49 @@ document.getElementById("searchSchedules").onclick = function () {
                         var dataset = result.data;
                         var results = document.getElementById("results");
                         var fare,CO2,timetaken,bike,lineno;
-
-                        var timenow = new Date();
-
                         for(var i = 0; i < dataset.length; i++) {
                             var opt = document.createElement('option');
-
-                           document.getElementById("fares").innerHTML =" <h5>For the selected stations,<br> </h5> BART Blue Ticket Fare :" + String(dataset[0]["@fare"]);
-                           document.getElementById("CO2").innerHTML ="CO2 emission is : " + String(dataset[0]["@co2"]);
-                           document.getElementById("timetaken").innerHTML = "Estimated Minutes of trip :" + String(dataset[0]["@tripTime"]);
+                            document.getElementById("fares").innerHTML =" <h5>For the selected stations,<br> </h5> BART Blue Ticket Fare :" + String(dataset[0]["@fare"]);
+                            document.getElementById("CO2").innerHTML ="CO2 emission is : " + String(dataset[0]["@co2"]);
+                            document.getElementById("timetaken").innerHTML = "Estimated Minutes of trip :" + String(dataset[0]["@tripTime"]);
                             timer(dataset[0]["@origTimeMin"]);
-
-                        opt.innerHTML = "Leg "+(i+1)+": <br> &emsp;|&emsp;Departure Time : " +String(dataset[i]["@origTimeMin"] + "&emsp;|&emsp;"+"Arrival Time : " + dataset[i]["@destTimeMin"]);
-
-dataset[0].leg['@bikeflag']
-
+                            opt.innerHTML = "Leg "+(i+1)+": <br> &emsp;|&emsp;Departure Time : " +String(dataset[i]["@origTimeMin"] + "&emsp;|&emsp;"+"Arrival Time : " + dataset[i]["@destTimeMin"]);
+                            dataset[0].leg['@bikeflag']
                             opt.value = "Leg "+(i+1)+": &emsp;|&emsp;Departure Time : " +String(dataset[i]["@origTimeMin"] + "&emsp;|&emsp;"+"Arrival Time : " + dataset[i]["@destTimeMin"]);
                             results.appendChild(opt);
                         }
 
                     },
                     error: function() {
-                        console.log("error");
+                        console.log("SeachSchedules.js error");
                     },
             });
         }
 };
 
 function timer(destTimeHours) {
-    // Return today's date and time
+
     var currentTime = new Date();
     var day = currentTime.getDate();
     var month = currentTime.getMonth();
     var year = currentTime.getFullYear();
     var hour = convert_to_24h(destTimeHours)[0]
     var min = convert_to_24h(destTimeHours)[1]
-    // Set the date we're counting down to
     var countDownDate = new Date(year,month,day,hour,min).getTime();
-    // Update the count down every 1 second
+ //clearing the values so that two events dont run or overlap with previous events
     var x = setInterval(function() {
         if (intervalId != x && intervalId != null){
             clearInterval(intervalId);
         }
         intervalId = x;
-        // Get todays date and time
         var now = new Date().getTime();
-        // Find the distance between now an the count down date
-        distance=countDownDate - now;
-        // Time calculations for days, hours, minutes and seconds
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+         distance=countDownDate - now;
+         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
         var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        // Output the result in an element with id="Countdown"
+        // Output the result element with id="Countdown"
         document.getElementById("Countdown").innerHTML = "Time left till the next train departs:"+days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
-        // If the count down is over, write some text
         if (distance < 0) {
             clearInterval(x);
             clearInterval(window.refreshIntervalId);
@@ -173,7 +161,7 @@ function getLatLngOrigin(station){
             console.log("get"+lng_org)
        },
         error: function() {
-            console.log("error");
+            console.log(" LatLongOrigin error");
         },
 
     });
@@ -192,7 +180,7 @@ function getLatLngDest(station){
             lng_dest = parseFloat(result.data.gtfs_longitude);
        },
         error: function() {
-            console.log("error");
+            console.log(" LatLOngDest error");
         },
 
     });
